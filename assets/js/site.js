@@ -173,10 +173,78 @@ function updateLiveStatusDot() {
 document.addEventListener('DOMContentLoaded', () => {
     updateLiveStatusDot();
     
+    // Hızlı WhatsApp butonlarını bağla
     document.querySelectorAll('.sub-whatsapp-btn, .btn-whatsapp').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             shareGPSLocation();
         });
     });
+    
+    // Yüzen WhatsApp butonunu otomatik enjekte et
+    if (!document.querySelector('.floating-whatsapp')) {
+        const floatWA = document.createElement('a');
+        floatWA.href = '#';
+        floatWA.className = 'floating-whatsapp';
+        floatWA.innerHTML = '💬';
+        floatWA.title = '7/24 Acil WhatsApp Konum Gönder';
+        floatWA.addEventListener('click', (e) => {
+            e.preventDefault();
+            shareGPSLocation();
+        });
+        document.body.appendChild(floatWA);
+    }
+    
+    // Acil Arama Butonunu periyodik sars (Shake)
+    setInterval(() => {
+        const btn = document.querySelector('.emergency-pulse-btn');
+        if (btn) {
+            btn.classList.add('shake-active');
+            setTimeout(() => {
+                btn.classList.remove('shake-active');
+            }, 700);
+        }
+    }, 7000);
 });
+
+// ♿ Erişilebilirlik - Yazı Boyutu Ayarlama
+let textScale = 1.0;
+function changeTextSize(action) {
+    if (action === 'up') {
+        if (textScale < 1.25) textScale += 0.05;
+    } else if (action === 'down') {
+        if (textScale > 0.90) textScale -= 0.05;
+    }
+    document.documentElement.style.fontSize = `${textScale * 100}%`;
+}
+
+// 📱 GPS Konum Destekli Acil SMS Gönderme
+function sendSMSLocation() {
+    const phone = "+905551663380";
+    const defaultMsg = "Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım desteği almak istiyorum.";
+    
+    if (navigator.geolocation) {
+        const btn = document.querySelector('.sub-sms-btn');
+        const originalText = btn ? btn.innerHTML : "";
+        if (btn) btn.innerHTML = "📍 Konum Aranıyor...";
+        
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const mapLink = `https://maps.google.com/?q=${lat},${lng}`;
+                const msg = `Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım desteği istiyorum. Konumum: ${mapLink}`;
+                if (btn) btn.innerHTML = originalText;
+                window.location.href = `sms:${phone}?body=${encodeURIComponent(msg)}`;
+            },
+            function(err) {
+                console.log("SMS Geolocation failed, using default message");
+                if (btn) btn.innerHTML = originalText;
+                window.location.href = `sms:${phone}?body=${encodeURIComponent(defaultMsg)}`;
+            },
+            { enableHighAccuracy: true, timeout: 5000 }
+        );
+    } else {
+        window.location.href = `sms:${phone}?body=${encodeURIComponent(defaultMsg)}`;
+    }
+}

@@ -32,10 +32,10 @@
             font-weight: 800;
             line-height: 1;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, #ff7e5f 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 71, 87, 0.15);
+            text-shadow: 0 0 20px var(--primary-glow);
         }
         .error-title {
             font-size: 1.8rem;
@@ -60,7 +60,7 @@
             width: 100%;
             max-width: 320px;
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 50px;
             font-weight: 800;
             font-size: 1.05rem;
             display: inline-flex;
@@ -85,15 +85,15 @@
     </style>
 </head>
 <body>
-
+ 
     <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="/assets/img/logo.png" alt="Jet Akü" height="100">
+                <img src="/assets/img/logo.png?v=1" alt="Jet Akü" height="100">
             </a>
         </div>
     </nav>
-
+ 
     <div class="container error-page-wrapper">
         <div class="error-card">
             <div class="error-code">404</div>

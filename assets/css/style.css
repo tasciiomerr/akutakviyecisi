@@ -1729,3 +1729,141 @@ nav {
     color: var(--text-muted);
     font-weight: 600;
 }
+
+/* --- CRO, UX ve Altyapı İyileştirmeleri CSS Eklemleri --- */
+
+/* 1. Çağrı Butonu Sarsıntı Animasyonu */
+.emergency-pulse-btn.shake-active {
+    animation: buttonShake 0.6s ease-in-out;
+}
+@keyframes buttonShake {
+    0%, 100% { transform: scale(1.02); }
+    15%, 45%, 75% { transform: scale(1.02) translateX(-4px); }
+    30%, 60% { transform: scale(1.02) translateX(4px); }
+}
+
+/* 2. Yüzen WhatsApp Balonu */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 95px; /* Alt barın üzerinde duracak şekilde */
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: white !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: floatPulse 2s infinite;
+}
+.floating-whatsapp:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6);
+}
+@keyframes floatPulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+@media screen and (max-width: 768px) {
+    .floating-whatsapp {
+        bottom: 100px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+}
+
+/* 3. Erişilebilirlik Butonları (Yazı Boyutu) */
+.accessibility-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.accessibility-btn:hover {
+    background: var(--primary);
+    color: #030712;
+    border-color: var(--primary);
+}
+
+/* 4. Rozet Izgarası */
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 30px auto 10px auto;
+    max-width: 900px;
+}
+@media screen and (max-width: 991px) {
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+.badge-item {
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 16px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s;
+}
+.badge-item:hover {
+    border-color: rgba(0, 242, 254, 0.2);
+    background: rgba(15, 23, 42, 0.6);
+    transform: translateY(-2px);
+}
+.badge-icon {
+    font-size: 1.5rem;
+}
+.badge-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+/* 5. SMS Buton Stili */
+.sub-sms-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    color: #3b82f6 !important;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-top: 5px;
+}
+.sub-sms-btn:hover {
+    background: #3b82f6;
+    color: #030712 !important;
+    transform: translateY(-1px);
+}

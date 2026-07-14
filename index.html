@@ -67,8 +67,55 @@
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Yerinde Akü Değişimi"}},
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Yerinde Akü Takviye"}},
           {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "7/24 Akü Yol Yardım"}}
-        ]
       }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Akü değişimi sırasında aracımın beyin hafızası silinir mi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kesinlikle hayır! Jet Akü mobil ekipleri, montaj esnasında aracınıza özel Memory Saver (Hafıza Koruma) cihazı bağlar. Bu sayede araç beynindeki voltaj sıfırlanmaz; radyo şifreniz, saat ayarlarınız ve direksiyon kalibrasyon hafızanız %100 korunur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Takacağınız yeni akülerin garantisi ve üretim yılı nedir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sistemimizde asla bayat veya rafta beklemiş akü bulundurmuyoruz. Tüm akülerimiz içinde bulunduğumuz yılın taze üretimi olup, adınıza doldurulan garanti belgesiyle birlikte 2 yıl resmi distribütör garantilidir."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bulunduğum konuma mobil ekibin gelmesi ne kadar sürer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Çanakkale Merkez lojistik merkezimizden yola çıkan ve Çanakkale genelinde hazır kıta bekleyen mobil servis ekiplerimiz sayesinde, konumunuz alındığı andan itibaren ortalama 20-30 dakika içerisinde adresinize intikal ediyoruz."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kapıda kredi kartı veya havale ile ödeme yapabilir miyim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evet, tüm mobil servis araçlarımızda kablosuz POS cihazı standart olarak bulunmaktadır. Yerinde akü takviye veya değişim işlemleriniz bittiğinde nakit, kredi kartı, temassız ödeme ya da IBAN üzerinden kolayca ödemenizi tamamlayabilirsiniz."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Aracımın aküsünün bittiğinden emin değilim, yine de gelmeli misiniz?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ekiplerimiz adrese ulaştığında ezbere doğrudan akü değişimi yapmaz. Gelişmiş dijital ölçüm cihazlarımızla önce akünüzün ömrünü, ardından alternatörün (şarj dinamosunun) kaçak durumunu test ederiz. Eğer akünüz sağlam ve sadece boşalmışsa, güvenli takviye yaparız; ömrü bittiyse değişime geçeriz."
+          }
+        }
+      ]
     }
     </script>
 </head>
@@ -78,9 +125,11 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="/assets/img/logo.png?v=1" alt="Jet Akü" height="100">
-                <div class="navbar-status d-none d-sm-inline-flex">
+                <div class="navbar-status d-none d-sm-inline-flex align-items-center">
                     <span class="status-dot"></span>
                     <span>7/24 NÖBETÇİ EKİPLER AKTİF</span>
+                    <button class="accessibility-btn" onclick="changeTextSize('up'); return false;" title="Yazıyı Büyüt">A+</button>
+                    <button class="accessibility-btn" onclick="changeTextSize('down'); return false;" title="Yazıyı Küçült">A-</button>
                 </div>
             </a>
 
@@ -220,6 +269,7 @@
             <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
                 <a href="tel:+905551663380" class="emergency-pulse-btn">📞 ACİL YOL YARDIM ÇAĞIR</a>
                 <a href="https://wa.me/905551663380?text=Merhaba+Jet+Ak%C3%BC+Ustas%C4%B1%2C+yolda+kald%C4%B1m.+Yol+yard%C4%B1m+ve+fiyat+teklifi+almak+istiyorum.+Konumumu+payla%C5%9F%C4%B1yorum%3A" target="_blank" class="sub-whatsapp-btn">💬 WhatsApp Konum Gönder</a>
+                <a href="#" onclick="sendSMSLocation(); return false;" class="sub-sms-btn">✉️ İnternetsiz Konum: SMS Gönder</a>
             </div>
         </section>
         
@@ -228,6 +278,28 @@
             <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Mobil Ekip</div></div>
             <div class="stat-card"><div class="stat-num">30 dk</div><div class="stat-label">Ort. Varış</div></div>
             <div class="stat-card"><div class="stat-num">%100</div><div class="stat-label">Güvenli Esnaf</div></div>
+        </section>
+
+        <!-- GÜVEN ROZETLERİ ŞERİDİ -->
+        <section class="badges-section" style="padding: 10px 0;">
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <div class="badge-icon">💳</div>
+                    <div class="badge-label">Kapıda POS ile Ödeme</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">🛡️</div>
+                    <div class="badge-label">2 Yıl Resmi Garanti</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">♻️</div>
+                    <div class="badge-label">Eski Akü Hurda İndirimi</div>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">🌱</div>
+                    <div class="badge-label">Çevre Dostu Geri Dönüşüm</div>
+                </div>
+            </div>
         </section>
 
         <!-- NASIL ÇALIŞIR ZAMAN ÇİZGİSİ -->
