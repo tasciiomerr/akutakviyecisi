@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jet-aku-v1';
+const CACHE_NAME = 'jet-aku-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
