@@ -61,7 +61,7 @@ nextStep(4);
 }
 
 const districts = [
-    { name: "Ayvacık", region: "anadolu", seo: "ayvacik" }, { name: "Ecebat", region: "avrupa", seo:"ecebat" }, { name: "Bayramiç", region: "anadolu", seo:"bayramic" },
+    { name: "Ayvacık", region: "anadolu", seo: "ayvacik" }, { name: "Eceabat", region: "avrupa", seo:"eceabat" }, { name: "Bayramiç", region: "anadolu", seo:"bayramic" },
     { name: "Gelibolu", region: "avrupa", seo: "gelibolu" }, { name: "Biga", region: "anadolu", seo:"biga" }, { name: "Bozcaada", region: "anadolu", seo:"bozcaada" },
     { name: "Çan", region: "anadolu", seo:"can" }, { name: "Ezine", region: "anadolu", seo:"ezine" }, { name: "Gökçeada", region: "anadolu", seo:"gokceada" },
     { name: "Lapseki", region: "anadolu", seo:"lapseki" }, { name: "Yenice", region: "anadolu", seo:"yenice" }
@@ -82,7 +82,11 @@ function toggleSubMenu(id, e) { if (window.innerWidth <= 768) { if(e) e.stopProp
 function filterRegion(region, btn) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); if(region === 'tum') { renderCards(districts); } else { renderCards(districts.filter(d => d.region === region)); } }
 function searchDistricts() { renderCards(districts.filter(d => d.name.toLowerCase().includes(document.getElementById('liveSearch').value.toLowerCase()))); }
 function goToLocation(name, reg) { window.location.href = `./${encodeURIComponent(name)}`; }
-function goToBrand(brandName) { window.location.href = `./icerik.html?marka=${encodeURIComponent(brandName)}`; }
+function goToBrand(brandName) {
+    const markaInput = document.getElementById('wizMarka');
+    if (markaInput) { markaInput.value = brandName + " "; }
+    scrollToWizard();
+}
 
 window.onload = function() {
     renderCards(districts);
