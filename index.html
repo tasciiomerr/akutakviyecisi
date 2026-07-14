@@ -76,8 +76,12 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top border-bottom border-secondary">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand d-flex align-items-center" href="/">
                 <img src="/assets/img/logo.png?v=1" alt="Jet Akü" height="100">
+                <div class="navbar-status d-none d-sm-inline-flex">
+                    <span class="status-dot"></span>
+                    <span>7/24 NÖBETÇİ EKİPLER AKTİF</span>
+                </div>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
@@ -213,9 +217,9 @@
             <h2>7/24 Çanakkale Acil Mobil Akü Yol Yardım Hattı</h2>
             <p>Çanakkale'nin tüm ilçelerinde ve tüm araç markalarında arıza konumunuza en yakın mobil ekipleri sevk ediyoruz.</p>
             
-            <div class="hero-buttons">
-                <a href="tel:+905551663380" class="hero-btn btn-rep">📞 Müşteri Temsilcisini Ara</a>
-                <button onclick="scrollToWizard()" class="hero-btn btn-wizard">⚡ Hızlı Fiyat / Teklif Al</button>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <a href="tel:+905551663380" class="emergency-pulse-btn">📞 ACİL YOL YARDIM ÇAĞIR</a>
+                <a href="https://wa.me/905551663380?text=Merhaba+Jet+Ak%C3%BC+Ustas%C4%B1%2C+yolda+kald%C4%B1m.+Yol+yard%C4%B1m+ve+fiyat+teklifi+almak+istiyorum.+Konumumu+payla%C5%9F%C4%B1yorum%3A" target="_blank" class="sub-whatsapp-btn">💬 WhatsApp Konum Gönder</a>
             </div>
         </section>
         
@@ -248,6 +252,24 @@
                     <div class="timeline-step-num">Adım 3</div>
                     <h4>30 Dakikada Çözüm</h4>
                     <p>Ekibimiz gelsin, akünüzü yerinde değiştirsin veya takviyesini yapsın, güvenle yola devam edin.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HİZMET SEÇİM ALANI -->
+        <section class="app-service-section">
+            <div class="grid-title">⚡ İhtiyacınız Olan Hizmet</div>
+            <div class="grid-subtitle">Hızlı gezici ekibimizin size en uygun müdahaleyi yapması için hizmet türünü seçin.</div>
+            <div class="app-service-grid">
+                <div class="app-service-card" onclick="scrollToWizardWithService('Yerinde Akü Değişimi')">
+                    <div class="app-service-icon">🔄</div>
+                    <h3>Yerinde Akü Değişimi</h3>
+                    <p>Akünüz tamamen bittiyse ve ömrünü tamamladıysa, aracınıza uygun sıfır aküyü konumunuzda monte edelim.</p>
+                </div>
+                <div class="app-service-card" onclick="scrollToWizardWithService('Yerinde Akü Takviye (Takviye/Booster)')">
+                    <div class="app-service-icon">⚡</div>
+                    <h3>Yerinde Akü Takviye</h3>
+                    <p>Akünüz şarj boşalttıysa, profesyonel booster cihazlarımızla aracınızı konumunuzda çalıştıralım.</p>
                 </div>
             </div>
         </section>
@@ -448,6 +470,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+function scrollToWizardWithService(serviceName) {
+    selectOption('hizmet', serviceName, 1);
+    scrollToWizard();
+}
+
 document.querySelectorAll('.dropdown-submenu > a').forEach(function(element) {
     element.addEventListener('click', function(e) {
         if (window.innerWidth < 992) {
