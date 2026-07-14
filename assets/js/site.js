@@ -105,18 +105,33 @@ window.onload = function() {
     }
 };
 
+// 🔍 Sayfa H1 başlığına göre dinamik usta mesajı oluşturan fonksiyon
+function getDynamicMessage() {
+    const h1 = document.querySelector('h1');
+    const headingText = h1 ? h1.textContent.trim().replace(/\s+/g, ' ') : '';
+    
+    // Anasayfa veya boş durumlar için varsayılan mesaj
+    if (!headingText || headingText.includes("Sıkça") || headingText.includes("İletişim") || headingText.includes("Hakkımızda")) {
+        return "Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım ve fiyat teklifi almak istiyorum.";
+    }
+    
+    return `Merhaba Jet Akü Ustası, ${headingText} hizmetiniz için yazıyorum.`;
+}
+
 // 📍 GPS Konumunu WhatsApp Mesajına Ekleyen Uber-Tarzı Fonksiyon
 function shareGPSLocation() {
-    const defaultMessage = "Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım ve fiyat teklifi almak istiyorum.";
-    const defaultUrl = `https://wa.me/905551663380?text=${encodeURIComponent(defaultMessage)}`;
+    const baseMsg = getDynamicMessage();
+    const defaultUrl = `https://wa.me/905551663380?text=${encodeURIComponent(baseMsg)}`;
     
     if (navigator.geolocation) {
         // Butonlardaki yazıyı yükleniyor durumuna getir
-        const buttons = document.querySelectorAll('.sub-whatsapp-btn, .btn-whatsapp');
+        const buttons = document.querySelectorAll('.sub-whatsapp-btn, .btn-whatsapp, .floating-whatsapp');
         const originalTexts = [];
         buttons.forEach((btn, index) => {
             originalTexts[index] = btn.innerHTML;
-            btn.innerHTML = "📍 Konumunuz Bulunuyor...";
+            if (!btn.classList.contains('floating-whatsapp')) {
+                btn.innerHTML = "📍 Konumunuz Bulunuyor...";
+            }
         });
         
         navigator.geolocation.getCurrentPosition(
@@ -124,7 +139,7 @@ function shareGPSLocation() {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 const mapLink = `https://maps.google.com/?q=${lat},${lng}`;
-                const gpsMessage = `Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım ve fiyat teklifi almak istiyorum. Canlı Harita Konumum: ${mapLink}`;
+                const gpsMessage = `${baseMsg} Canlı Harita Konumum: ${mapLink}`;
                 const waUrl = `https://wa.me/905551663380?text=${encodeURIComponent(gpsMessage)}`;
                 
                 // Buton yazılarını sıfırla
@@ -221,7 +236,7 @@ function changeTextSize(action) {
 // 📱 GPS Konum Destekli Acil SMS Gönderme
 function sendSMSLocation() {
     const phone = "+905551663380";
-    const defaultMsg = "Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım desteği almak istiyorum.";
+    const baseMsg = getDynamicMessage();
     
     if (navigator.geolocation) {
         const btn = document.querySelector('.sub-sms-btn');
@@ -233,18 +248,18 @@ function sendSMSLocation() {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 const mapLink = `https://maps.google.com/?q=${lat},${lng}`;
-                const msg = `Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım desteği istiyorum. Konumum: ${mapLink}`;
+                const msg = `${baseMsg} Konumum: ${mapLink}`;
                 if (btn) btn.innerHTML = originalText;
                 window.location.href = `sms:${phone}?body=${encodeURIComponent(msg)}`;
             },
             function(err) {
                 console.log("SMS Geolocation failed, using default message");
                 if (btn) btn.innerHTML = originalText;
-                window.location.href = `sms:${phone}?body=${encodeURIComponent(defaultMsg)}`;
+                window.location.href = `sms:${phone}?body=${encodeURIComponent(baseMsg)}`;
             },
             { enableHighAccuracy: true, timeout: 5000 }
         );
     } else {
-        window.location.href = `sms:${phone}?body=${encodeURIComponent(defaultMsg)}`;
+        window.location.href = `sms:${phone}?body=${encodeURIComponent(baseMsg)}`;
     }
 }
