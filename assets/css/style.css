@@ -1350,22 +1350,22 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: rgba(37, 211, 102, 0.08);
-    border: 1px solid rgba(37, 211, 102, 0.25);
-    color: #25D366 !important;
+    background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-hover) 100%) !important;
+    color: white !important;
     font-size: 1.1rem;
     font-weight: 700;
     padding: 16px 36px;
     border-radius: 50px;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+    border: none;
 }
 .sub-whatsapp-btn:hover {
-    background: var(--whatsapp);
-    color: #030712 !important;
+    background: var(--whatsapp-hover) !important;
+    color: white !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.25);
-    border-color: transparent;
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.35);
 }
 
 /* Live Status Badge in Navbar */

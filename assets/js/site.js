@@ -67,7 +67,10 @@ const districts = [
     { name: "Lapseki", region: "anadolu", seo:"lapseki" }, { name: "Yenice", region: "anadolu", seo:"yenice" },
     { name: "Kepez", region: "anadolu", seo: "kepez" }, { name: "Geyikli", region: "anadolu", seo: "geyikli" },
     { name: "Karabiga", region: "anadolu", seo: "karabiga" }, { name: "Çardak", region: "anadolu", seo: "cardak" },
-    { name: "Umurbey", region: "anadolu", seo: "umurbey" }
+    { name: "Umurbey", region: "anadolu", seo: "umurbey" },
+    { name: "Küçükkuyu", region: "anadolu", seo: "kucukkuyu" }, { name: "Assos", region: "anadolu", seo: "assos" },
+    { name: "Güzelyalı", region: "anadolu", seo: "guzelyali" }, { name: "Dardanos", region: "anadolu", seo: "dardanos" },
+    { name: "Gümüşçay", region: "anadolu", seo: "gumuscay" }
 ];
 
 function renderCards(data) {
