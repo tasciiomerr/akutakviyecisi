@@ -104,3 +104,79 @@ window.onload = function() {
         });
     }
 };
+
+// 📍 GPS Konumunu WhatsApp Mesajına Ekleyen Uber-Tarzı Fonksiyon
+function shareGPSLocation() {
+    const defaultMessage = "Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım ve fiyat teklifi almak istiyorum.";
+    const defaultUrl = `https://wa.me/905551663380?text=${encodeURIComponent(defaultMessage)}`;
+    
+    if (navigator.geolocation) {
+        // Butonlardaki yazıyı yükleniyor durumuna getir
+        const buttons = document.querySelectorAll('.sub-whatsapp-btn, .btn-whatsapp');
+        const originalTexts = [];
+        buttons.forEach((btn, index) => {
+            originalTexts[index] = btn.innerHTML;
+            btn.innerHTML = "📍 Konumunuz Bulunuyor...";
+        });
+        
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const mapLink = `https://maps.google.com/?q=${lat},${lng}`;
+                const gpsMessage = `Merhaba Jet Akü Ustası, yolda kaldım. Yol yardım ve fiyat teklifi almak istiyorum. Canlı Harita Konumum: ${mapLink}`;
+                const waUrl = `https://wa.me/905551663380?text=${encodeURIComponent(gpsMessage)}`;
+                
+                // Buton yazılarını sıfırla
+                buttons.forEach((btn, index) => {
+                    btn.innerHTML = originalTexts[index];
+                });
+                
+                // WhatsApp'a yönlendir
+                window.open(waUrl, '_blank');
+            },
+            function(error) {
+                console.log("GPS hatası alındı, varsayılan WhatsApp yönlendirmesi yapılıyor:", error);
+                buttons.forEach((btn, index) => {
+                    btn.innerHTML = originalTexts[index];
+                });
+                window.open(defaultUrl, '_blank');
+            },
+            { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 }
+        );
+    } else {
+        window.open(defaultUrl, '_blank');
+    }
+}
+
+// ⏱️ Saat bazlı Nöbetçi Ekip durum göstergesi güncelleme
+function updateLiveStatusDot() {
+    const statusTextEl = document.querySelector('.navbar-status span:last-child');
+    if (!statusTextEl) return;
+    
+    const currentHour = new Date().getHours();
+    
+    // Gece Modu: 20:00 - 08:00
+    if (currentHour >= 20 || currentHour < 8) {
+        statusTextEl.textContent = "7/24 GECE NÖBETÇİ EKİPLER AKTİF";
+        const dot = document.querySelector('.status-dot');
+        if (dot) {
+            dot.style.background = "#10b981";
+            dot.style.boxShadow = "0 0 12px #10b981";
+        }
+    } else {
+        statusTextEl.textContent = "7/24 GEZİCİ EKİPLER SAHADA";
+    }
+}
+
+// Sayfa yüklendiğinde butonları dinle ve saat durumunu güncelle
+document.addEventListener('DOMContentLoaded', () => {
+    updateLiveStatusDot();
+    
+    document.querySelectorAll('.sub-whatsapp-btn, .btn-whatsapp').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            shareGPSLocation();
+        });
+    });
+});
