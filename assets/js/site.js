@@ -71,8 +71,8 @@ function renderCards(data) {
     const grid = document.getElementById('districtGrid'); if(!grid) return; grid.innerHTML = "";
     data.forEach(item => {
         const badgeClass = item.region === 'avrupa' ? 'badge-avrupa' : 'badge-anadolu';
-        const statusText = item.region === 'avrupa' ? 'AKTİF MOBİL EKİP' : 'TALEP ÜZERİNE SERVİS';
-        const statusClass = item.region === 'avrupa' ? 'status-active' : 'status-request';
+        const statusText = item.region === 'anadolu' ? 'AKTİF MOBİL EKİP' : 'TALEP ÜZERİNE SERVİS';
+        const statusClass = item.region === 'anadolu' ? 'status-active' : 'status-request';
         grid.innerHTML += `<div class="district-card" onclick="goToLocation('${item.seo}', '${item.region}')"><div class="card-title">${item.name}</div><span class="card-badge ${badgeClass}">${item.region}</span><div class="card-status ${statusClass}">${statusText}</div></div>`;
     });
 }
